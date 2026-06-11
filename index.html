@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Oficial da Esposa Bourdot ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#4a0404,#7f1d1d,#b91c1c);
+min-height:100vh;display:flex;justify-content:center;align-items:center;
+padding:20px;color:#222}
+.container{background:#fff;max-width:750px;width:100%;padding:35px;border-radius:20px;text-align:center}
+button{width:100%;padding:14px;margin:8px 0;border:none;border-radius:10px;background:#b00020;color:#fff;cursor:pointer}
+input{width:100%;padding:14px;border:1px solid #ccc;border-radius:10px}
+.hidden{display:none}
+#feedback,#mensagem{margin-top:15px;font-weight:bold}
+.barra{width:100%;height:28px;background:#eee;border-radius:20px;overflow:hidden}
+.progresso{height:100%;width:0;background:#b00020;transition:1s}
+.certificado{border:4px solid #b00020;padding:20px;border-radius:15px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="login">
+<h1>🔒 Sistema Oficial de Verificação de Esposas</h1>
+<p>Digite seu nome completo:</p>
+<input id="nome" onkeydown="if(event.key === 'Enter') verificarNome()">
+<button onclick="verificarNome()">Entrar</button>
+<div id="mensagem"></div>
+</div>
+
+<div id="quiz" class="hidden">
+<h1 id="titulo"></h1>
+<p id="texto"></p>
+<div id="opcoes"></div>
+<div id="feedback"></div>
+</div>
+
+<div id="resultado" class="hidden">
+<h1>📋 Processando respostas...</h1>
+<p id="status">Analisando histórico do relacionamento...</p>
+<div class="barra"><div id="barra" class="progresso"></div></div>
+</div>
+
+<div id="certificado" class="hidden">
+<div class="certificado">
+<h1>🏆 CERTIFICADO OFICIAL</h1>
+<p>Após análise minuciosa das respostas fornecidas:</p>
+<h2>Aline Vitoria Romano Bourdot</h2>
+<p>foi APROVADA no Teste Oficial de Namorada/Esposa do Ano.</p>
+<h2>Nota Final: 1000/10</h2>
+<p>A banca avaliadora concluiu que a candidata é absurdamente apaixonável.</p>
+<button onclick="abrirCarta()">💌 Ler observações finais da avaliadora</button>
+</div>
+</div>
+
+<div id="carta" class="hidden">
+
+<h1>❤️ Para Aline ❤️</h1>
+
+<p>
+Bom...
+</p>
+
+<p>
+Depois de todas essas perguntas, acho que já percebeu que essa surpresa não era exatamente um teste.
+</p>
+
+<p>
+Era só uma desculpa para eu te lembrar o quanto você é importante para mim.
+</p>
+
+<p>
+Nesses 4 anos juntas, você se tornou a minha pessoa favorita para dividir a vida, os planos, as risadas e até os momentos difíceis.
+</p>
+
+<p>
+E mesmo depois de tudo o que vivemos, eu continuo me apaixonando por você de formas diferentes todos os dias.
+</p>
+
+<p>
+Obrigado por ser minha parceira, minha melhor amiga, minha esposa e, principalmente, por ser você.
+</p>
+
+<p>
+Eu te amo muito. ❤️
+</p>
+
+<p>
+Com amor,
+</p>
+
+<h2>
+Tchutchuca
+</h2>
+
+</div>
+
+</div>
+
+<script>
+let tentativas=0;
+let erros=0;
+let atual=0;
+
+const perguntas=[
+{t:"🎁 Vamos começar",q:"Qual é o meu apelido?",o:["Amor","Vida","Tchutchuca","Bebê"],c:2,
+e:["🤨 Tá me tirando né? Pensa melhor.","😂 Tá errando de propósito que eu sei.","📱 Agora valendo um iPhone 17 Pro Max."]},
+{t:"Pergunta 2",q:"Onde nos conhecemos?",o:["Instagram","Twitter","Tinder"],c:2,
+e:["🤨 Não foi aí não...","📱 Você tá confundindo os aplicativos.","😂 Pelo visto vou ter que contar nossa história de novo."]},
+{t:"Pergunta 3",q:"Que dia nos vimos pela primeira vez?",o:["18 de janeiro de 2022","11 de junho de 2022","16 de julho de 2022","04 de agosto de 2022"],c:1,
+e:["📅 Tá perto... ou não.","🤔 Esse dia aconteceu, mas não foi esse.","🚨 A memória da usuária está sendo investigada."]},
+{t:"Pergunta 4",q:"Quem se apaixonou primeiro?",o:["Marcela tchutchuca","Eu Aline linda esposa da minha tchutchuca","As duas juntas"],c:null},
+{t:"Pergunta 5",q:"💆‍♀️ Valendo massagens e carinhos vitalícios... Quem é minha pessoa preferida no mundo?",o:["Aline","Aline","Aline","Aline"],c:null},
+{t:"Pergunta 6",q:"👀 E agora qual é a sua pessoa preferida? (polêmica)",o:["Marcela tchutchuca","Lorenzo","Harry Styles"],c:null}
+];
+
+function verificarNome(){
+const nome=document.getElementById('nome').value.toLowerCase();
+if(nome.includes('bourdot')){
+document.getElementById('login').classList.add('hidden');
+document.getElementById('quiz').classList.remove('hidden');
+mostrar();
+}else{
+tentativas++;
+const m=document.getElementById('mensagem');
+if(tentativas===1)m.innerHTML="😔 Poxa, tá com o nome desatualizado.";
+else if(tentativas===2)m.innerHTML="🤨 Tu me quebra né, tá casada comigo.";
+else m.innerHTML="😂 Não é possível não, teu nome de casada é Bourdot.";
+}
+}
+
+function mostrar(){
+document.getElementById('feedback').innerHTML='';
+let p=perguntas[atual];
+document.getElementById('titulo').innerText=p.t;
+document.getElementById('texto').innerText=p.q;
+let html='';
+p.o.forEach((op,i)=>{
+html+=`<button onclick="responder(${i})">${op}</button>`;
+});
+document.getElementById('opcoes').innerHTML=html;
+}
+
+function responder(i){
+let p=perguntas[atual];
+let fb=document.getElementById('feedback');
+
+if(atual===3){
+fb.innerHTML='💖 Independente de quem se apaixonou primeiro... o importante é que eu tenho certeza que terminei de me apaixonar completamente por você no dia do show.<br><br><button onclick="proxima()">➡️ Próxima pergunta</button>';
+return;
+}
+
+if(atual===4){
+fb.innerHTML='😂 Só tem você porque não tinha como errar.<br><br><button onclick="proxima()">Continuar</button>';
+return;
+}
+
+if(atual===5){
+let msg='';
+if(i===0) msg='😌 Eu sei eu sei, sou foda. Mas todos temos um espaço especial.';
+if(i===1) msg='🥹 Realmente... ele é muito importante mesmo. Não tem como competir.';
+if(i===2) msg='😂 Bom, é um viado bem arrumado mesmo, mas acho que sou mais gente boa.';
+fb.innerHTML=msg+'<br><br><button onclick="finalizar()">🏁 Ir para a parte final</button>';
+return;
+}
+
+if(i===p.c){
+erros=0;
+proxima();
+}else{
+erros++;
+fb.innerHTML=p.e[Math.min(erros-1,p.e.length-1)];
+}
+}
+
+function proxima(){
+atual++;
+if(atual>=perguntas.length){finalizar();return;}
+mostrar();
+}
+
+function finalizar(){
+document.getElementById('quiz').classList.add('hidden');
+document.getElementById('resultado').classList.remove('hidden');
+
+let barra=document.getElementById('barra');
+let status=document.getElementById('status');
+let msgs=[
+"Analisando histórico do relacionamento...",
+"Verificando quantidade de amor...",
+"Consultando banco de dados das esposas...",
+"Resultado encontrado."
+];
+let p=0;
+let i=0;
+
+let inter=setInterval(()=>{
+p+=25;
+barra.style.width=p+"%";
+if(i<msgs.length) status.innerText=msgs[i++];
+if(p>=100){
+clearInterval(inter);
+setTimeout(()=>{
+document.getElementById('resultado').classList.add('hidden');
+document.getElementById('certificado').classList.remove('hidden');
+},1200);
+}
+},1000);
+}
+
+function abrirCarta(){
+document.getElementById('certificado').classList.add('hidden');
+document.getElementById('carta').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
